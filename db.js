@@ -1,7 +1,9 @@
 const mongoose = require('mongoose');
+require('dotenv').config();
 
 // Define the mongoDB connection URL
-const mongoURL = 'mongodb://localhost:27017/hotels';
+// const mongoURL = process.env.MONGODB_LOCAL;
+const mongoURL = process.env.MONGODB_URL;
 
 // Setup mongoDB connection
 mongoose.connect(mongoURL, {
@@ -14,7 +16,6 @@ mongoose.connect(mongoURL, {
 const db = mongoose.connection;
 
 // Define the event listeners for database connection
-
 db.on('connected', () => {
     console.log('Connected to MongoDB Server');
 });
