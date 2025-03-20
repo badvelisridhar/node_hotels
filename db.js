@@ -7,10 +7,21 @@ const mongoURL = process.env.MONGODB_URL;
 
 // Setup mongoDB connection
 mongoose.connect(mongoURL);
-// mongoose.connect(mongoURL, {
+// mongoose.connect(mongoURL, {         // For local instance
 //     useNewUrlParser: true,
 //     useUnifiedTopology: true
 // })
+mongoose.connect(mongoURL, {            // For Atlas or online instance
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    tls: true,
+    tlsAllowInvalidCertificates: false,
+    serverSelectionTimeoutMS: 5000
+  }).then(() => {
+    console.log("Connected to MongoDB!");
+  }).catch(err => {
+    console.error("MongoDB connection error:", err);
+  });
 
 // Get default connection
 // Mongoose main a default connection object representing the mongoDB connection
